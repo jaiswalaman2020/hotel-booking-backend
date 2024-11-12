@@ -1,6 +1,4 @@
-const { maxHeaderSize } = require("http");
 const mongoose = require("mongoose");
-const { float } = require("webidl-conversions");
 
 const settingsSchema = new mongoose.Schema({
   created_at: {

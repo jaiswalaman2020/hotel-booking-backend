@@ -1,5 +1,4 @@
-const { default: mongoose } = require("mongoose");
-const require = require("mongoose");
+const mongoose = require("mongoose");
 
 const bookingSchema = new mongoose.Schema({
   created_at: {
