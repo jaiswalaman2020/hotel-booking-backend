@@ -41,15 +41,16 @@ app.use(mongoSanitize());
 //Data sanitization against XSS
 app.use(xss());
 //Prevent parameter pollution
+
 app.use(hpp());
 
-app.get("/", (req, res) => {
-  res.status(200).send("Hello from the server side!");
-});
+//defining routes
+app.use("/api/v1/bookings", require("./routes/bookings.routes"));
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
 // app.use(globalErrorHandler);
+
 module.exports = app;
