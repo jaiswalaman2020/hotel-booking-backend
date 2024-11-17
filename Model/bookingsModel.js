@@ -35,16 +35,16 @@ const bookingSchema = new mongoose.Schema(
   }
 );
 
-bookingSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: "cabinId",
-    select: ["-_id", "name", "maxCapacity", "regularPrice", "discount"],
-  }).populate({
-    path: "guestId",
-    select: ["-_id", "fullName", "email", "nationality"],
-  });
-  next();
-});
+// bookingSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: "cabinId",
+//     select: ["-_id", "name", "maxCapacity", "regularPrice", "discount"],
+//   }).populate({
+//     path: "guestId",
+//     select: ["-_id", "fullName", "email", "nationality"],
+//   });
+//   next();
+// });
 
 const Bookings = mongoose.model("Bookings", bookingSchema);
 module.exports = Bookings;

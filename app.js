@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === "development") {
 app.use(helmet());
 //limit the number of requests from an IP
 const limiter = rateLimit({
-  max: 5,
+  max: 500,
   windowMs: 60 * 60 * 1000,
   message: "Too many requests from this IP, please try again in an hour!",
 });
@@ -46,6 +46,8 @@ app.use(hpp());
 
 //defining routes
 app.use("/api/v1/bookings", require("./routes/bookings.routes"));
+
+app.use("/api/v1/cabins", require("./routes/cabins.routes"));
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
