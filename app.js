@@ -49,6 +49,10 @@ app.use("/api/v1/bookings", require("./routes/bookings.routes"));
 
 app.use("/api/v1/cabins", require("./routes/cabins.routes"));
 
+app.use("/api/v1/guests", require("./routes/guest.routes"));
+
+app.use("/api/v1/seetings", require("./routes/seeting.routes"));
+
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });

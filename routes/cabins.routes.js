@@ -2,9 +2,12 @@ const express = require("express");
 const cabinController = require("../controller/cabinsController");
 const router = express.Router();
 
-router.route("/").get(cabinController.getAllCabins);
+router
+  .route("/")
+  .get(cabinController.getAllCabins)
+  .post(cabinController.createCabin);
 
-router.route("/new").post(cabinController.createCabin);
+// router.route("/new").post(cabinController.createCabin);
 //   .post(cabinController.createCabin);
 
 router
