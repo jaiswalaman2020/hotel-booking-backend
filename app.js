@@ -1,7 +1,8 @@
 require("dotenv").config();
-
 const express = require("express");
+
 const app = express();
+const logger = require("./utils/logger");
 const cors = require("cors");
 const path = require("path");
 const morgan = require("morgan");
@@ -13,7 +14,12 @@ const xss = require("xss-clean");
 const hpp = require("hpp");
 const AppError = require("./utils/appError");
 // const globalErrorHandler = require("./controller/errorController");
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 app.use(cookieParser());
@@ -21,9 +27,26 @@ app.use(cookieParser());
 //serving static files
 app.use(express.static(path.join(__dirname, "public")));
 // using morgan dev
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
-}
+// if (process.env.NODE_ENV === "development") {
+//   app.use(morgan("dev"));
+// }
+const morganFormat = ":method :url :status :response-time ms";
+
+app.use(
+  morgan(morganFormat, {
+    stream: {
+      write: (message) => {
+        const logObject = {
+          method: message.split(" ")[0],
+          url: message.split(" ")[1],
+          status: message.split(" ")[2],
+          responseTime: message.split(" ")[3],
+        };
+        logger.info(JSON.stringify(logObject));
+      },
+    },
+  })
+);
 
 //set security HTTP headers
 app.use(helmet());
