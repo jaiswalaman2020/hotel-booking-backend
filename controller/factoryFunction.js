@@ -64,7 +64,6 @@ exports.updateOne = (Model) => {
 
 exports.deleteOne = (Model) => {
   return catchAsync(async (req, res, next) => {
-    // Add `return` here
     const { id } = req.params;
     const doc = await Model.findByIdAndDelete(id);
     if (!doc) {
