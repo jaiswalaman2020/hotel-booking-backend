@@ -1,5 +1,3 @@
-const catchAsync = require("../utils/catchAsync");
-const AppError = require("../utils/appError");
 const factory = require("./factoryFunction");
 const cabinModel = require("../Model/CabinsModel");
 

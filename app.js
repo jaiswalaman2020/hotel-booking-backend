@@ -15,7 +15,7 @@ const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controller/errorController");
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3001",
     credentials: true,
   })
 );
@@ -57,7 +57,7 @@ app.use("/api/v1/cabins", require("./routes/cabins.routes"));
 app.use("/api/v1/guests", require("./routes/guest.routes"));
 
 app.use("/api/v1/seetings", require("./routes/seeting.routes"));
-app.use("/api/v1/auth", require("./routes/auth.routes"));
+// app.use("/api/v1/auth", require("./routes/auth.routes"));
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
